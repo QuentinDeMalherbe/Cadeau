@@ -1,0 +1,21 @@
+<h1>Ta Famille: <%= @famille.nom %></h1>
+<% if @famille.users.exists?(a_selectionne: true)%>
+<h2>Le tirage a été effectué ! Refaire c'est triché</h2>
+<p>Va vite voir à qui tu dois faire un cadeau</p>
+<p>Et propose tes idées</p>
+<p>Tu es: </p>
+<% end %>
+<% @famille.users.each do |u| %>
+<%= link_to  famille_user_path(@famille, u) , class:'text-decoration-none text-dark' do %>
+<div class="card mb-2">
+  <div class="card-body">
+    <%= u.first_name %>
+  </div>
+</div>
+<% end %>
+<% end %>
+
+<% unless @famille.users.exists?(a_selectionne: true)%>
+<%= link_to 'tirer au sort', {:controller => 'familles', :action => 'tirage', :id => @famille.id} , {:method => :post, class: 'btn btn-primary' }%>
+
+<% end %>

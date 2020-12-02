@@ -1,0 +1,14 @@
+<h1>Choisis ta famille!</h1>
+<% unless @familles.nil?%>
+<% @familles.each do |famille| %>
+<%= link_to   famille , class:'text-decoration-none text-dark' do  %>
+<div class="card mb-2">
+  <div class="card-body">
+    <%= famille.nom%>
+  </div>
+</div>
+<% end %>
+<% end %>
+<% end %>
+<h3>Créer ta famille</h3>
+<%= render 'familles/new', famille: Famille.new%>

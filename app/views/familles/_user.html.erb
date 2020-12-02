@@ -1,0 +1,13 @@
+    <tr>
+      <td><%= f.input :first_name, label: false%></td>
+      <td class='pl-2'><%= f.input :participant, :label => false , input_html: { class: 'custom-check-box ' }%></td>
+      <%  %>
+    </tr>
+
+    <style>
+      .custom-check-box {
+        width: 91%;
+        top: -24px;
+        height: 38px;
+      }
+    </style>

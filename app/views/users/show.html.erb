@@ -1,0 +1,46 @@
+<h2>Je suis <%= @user.first_name %></h2>
+<% if @user.participant %>
+<h2>je donne à <%= User.find(@user.give_to_user).first_name %>!!</h2>
+<div class="my-4">
+  <h2 style="text-align: start;">ses ideés de cadeau: </h2>
+  <div id="idees ">
+    <% if User.find(@user.give_to_user).idees.blank? %>
+    Il n'a pas d'idée pour le moment
+    <% else %>
+    <% User.find(@user.give_to_user).idees.each do |idee| %>
+    <p><%= idee.content %></p>
+    <% end %>
+    <% end %>
+  </div>
+</div>
+<div class="my-4">
+  <button class="btn btn-primary" onclick='devoile()'>Je veux savoir qui me donne mon cadeau</button>
+  <h2 class=" qui hidden" style="text-align: start;" >C'est <%= User.find(@user.recieve_from_user).first_name %> qui me gâte</h2>
+</div>
+<% end %>
+<div class="my-4">
+  <h2 style="text-align: start;">mes ideés de cadeau: </h2>
+  <div id="idees">
+    <% if @user.idees.blank? %>
+    J'ai pas d'idées...
+    <% else %>
+    <% @user.idees.each do |idee| %>
+    <p><%= idee.content %></p>
+    <% end %>
+    <% end %>
+  </div>
+</div>
+
+<h3>Donne une nouvelle idée:</h3>
+<%= simple_form_for([ @user.famille, @user, @idee ], remote: true) do |f| %>
+<%= f.input :content, as: :text, label: false %>
+<%= f.button :submit, 'Valide ton idée', class: 'btn btn-primary' %>
+<% end %>
+
+<script>
+
+  function devoile() {
+    const text = document.querySelector(".qui")
+    text.classList.toggle("hidden")
+  }
+</script>

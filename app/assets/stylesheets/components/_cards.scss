@@ -1,0 +1,9 @@
+.card {
+  border-radius: 10px;
+}
+
+.card :hover {
+  background-color: $red;
+  border-radius: 10px;
+  color: white;
+}

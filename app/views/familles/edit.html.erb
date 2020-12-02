@@ -1,0 +1,21 @@
+<%= simple_form_for @famille do |f| %>
+<%= f.input :nom %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Prénom</th>
+      <th class="pl-2">Participe au tirage</th>
+    </tr>
+  </thead>
+  <tbody class="fields">
+    <%= f.simple_fields_for :users do |builder| %>
+      <%= render 'user', f: builder %>
+    <% end %>
+  </tbody>
+</table>
+
+    <%= link_to_add_row("Ajouter un membre", f, :users, class:"btn btn-primary") %> <br>
+    <%= f.button :submit, "Créer ta famille", class: 'btn btn-primary mt-2' %>
+
+<% end %>
